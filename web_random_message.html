@@ -4,15 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Message</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #f4f1ea;
-            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---------- HEADER UEH ---------- */
+        .header {
+            background: white;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .header img {
+            height: 55px;
+        }
+        .header-title {
+            margin-left: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #005154;
+        }
+
+        /* ---------- CARD ---------- */
+        .wrapper {
+            height: calc(100vh - 90px);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
         }
         .card {
             background: white;
@@ -23,10 +47,12 @@
             width: 320px;
             animation: fade 0.4s ease;
         }
+
         @keyframes fade {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         button {
             padding: 10px 20px;
             border: none;
@@ -37,6 +63,8 @@
             font-size: 16px;
         }
         button:hover { opacity: 0.9; }
+
+        /* ---------- POPUP ---------- */
         #popup {
             position: fixed;
             top: 0;
@@ -48,22 +76,34 @@
             justify-content: center;
             align-items: center;
         }
+
         .popup-content {
             background: white;
             padding: 20px 30px;
             border-radius: 16px;
             max-width: 300px;
             animation: fade 0.3s ease;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h3>Nhận một thông điệp hôm nay</h3>
-    <button onclick="showMessage()">Nhận thông điệp</button>
+<!-- ---------- HEADER ---------- -->
+<div class="header">
+    <img src="UEH.png" alt="UEH Logo">
+    <div class="header-title">UEH UNIVERSITY – Sống Xanh Mỗi Ngày</div>
 </div>
 
+<!-- ---------- MAIN CONTENT ---------- -->
+<div class="wrapper">
+    <div class="card">
+        <h3>Nhận một thông điệp hôm nay</h3>
+        <button onclick="showMessage()">Nhận thông điệp</button>
+    </div>
+</div>
+
+<!-- ---------- POPUP ---------- -->
 <div id="popup" onclick="closePopup()">
     <div class="popup-content" onclick="event.stopPropagation()">
         <p id="messageText">...</p>
@@ -107,7 +147,8 @@
 
     function showMessage() {
         const randomIndex = Math.floor(Math.random() * messages.length);
-        document.getElementById("messageText").innerText = messages[randomIndex];
+        document.getElementById("messageText").innerText =
+            messages[randomIndex];
         document.getElementById("popup").style.display = "flex";
     }
 
@@ -118,3 +159,4 @@
 
 </body>
 </html>
+
