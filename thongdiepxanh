@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Message</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1ea;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---------- HEADER UEH ---------- */
+        .header {
+            background: white;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .header img {
+            height: 55px;
+        }
+        .header-title {
+            margin-left: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #005154;
+        }
+
+        /* ---------- CARD ---------- */
+        .wrapper {
+            height: calc(100vh - 90px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 320px;
+            animation: fade 0.4s ease;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #523a28;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { opacity: 0.9; }
+
+        /* ---------- POPUP ---------- */
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            max-width: 300px;
+            animation: fade 0.3s ease;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ---------- HEADER ---------- -->
+<div class="header">
+    <img src="UEH.png" alt="UEH Logo">
+    <div class="header-title">UEH UNIVERSITY – Sống Xanh Mỗi Ngày</div>
+</div>
+
+<!-- ---------- MAIN CONTENT ---------- -->
+<div class="wrapper">
+    <div class="card">
+        <h3>Nhận một thông điệp hôm nay</h3>
+        <button onclick="showMessage()">Nhận thông điệp</button>
+    </div>
+</div>
+
+<!-- ---------- POPUP ---------- -->
+<div id="popup" onclick="closePopup()">
+    <div class="popup-content" onclick="event.stopPropagation()">
+        <p id="messageText">...</p>
+        <button onclick="closePopup()">Đóng</button>
+    </div>
+</div>
+
+<script>
+    const messages = [
+        "Ủa tui tưởng ai cũng thích sống xanh chứ tarrrr",
+        "Đoán vội người đang đọc là một tín đồ sống xanh chính hiệu",
+        "Mời đoàn mình di chuyển lên xe bus",
+        "Mom ơi thử sống xanh cùng em đi",
+        "Dùng 1 từ để đánh giá dân chơi hệ xanh này: Vuýp !!!",
+        "Thắng đời 1:0 khi bạn thực hiện challenge này",
+        "Ê nha ê nha sống xanh vậy hay nha bro",
+        "Cá thể sống xanh vượt trội",
+        "Về kể không ai tin sống xanh dễ vậy luôn",
+        "Giảm sức mạnh con tướng UEHer vừa giỏi vừa sống xanh này giúp em",
+        "Ngoan xinh yêu sống xanh của UEH đây rồi",
+        "Sống xanh đi em còn do dự trái đất ô nhiễm mất",
+        "Tôi cho phép em sống xanh",
+        "+1 máy vừa giỏi vừa sống xanh",
+        "Bà sống xanh đỉnh zậy thiệt hả bà Thơ",
+        "Bóc trúng síc rịt UEHer sống xanh",
+        "Fen ơi mình thử đi phương tiện công cộng đi",
+        "Anh em mình cứ tập sống xanh thế thôi hẹ hẹ hẹ",
+        "Em bé UEHer sống xanh này thích gì nhắn chị",
+        "Thấy cũng cũng rồi đó, sống xanh tiếp đi",
+        "Cố lên Cố lên Sắp xanh rồi Sắp xanh rồi",
+        "Đọc cái này thì sống xanh lên - Ai sợ thì đi về",
+        "UEHer này sống xanh đỉnh nóc kịch trần bay phấp phới",
+        "Sống ở đời mình nể mỗi bạn sống xanh này",
+        "Em dành thời gian cho xe công cộng đi em! Em dành nhiều thời gian cho xe máy vậy làm gì?",
+        "UEHer này sống xanh sắp vượt mức pickleball",
+        "Ra đường tôi nể mỗi người sống xanh như bạn",
+        "Giảm sức mạnh con tướng vừa giỏi vừa biết sống xanh này giúp em",
+        "Đi bus gì chưa người đẹp",
+        "UEHer vừa giỏi vừa sống xanh lấy dùm chị ly nước cam"
+    ];
+
+    function showMessage() {
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        document.getElementById("messageText").innerText =
+            messages[randomIndex];
+        document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
